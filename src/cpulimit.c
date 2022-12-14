@@ -316,10 +316,12 @@ void limit_process(pid_t pid, double limit, int include_children)
 
 int main(int argc, char **argv){
 	#command line으로 입력 받기
-
+	
 	#command line으로 하나의 입력이 들어왔을때
 
 	#command line으로 두개 이상의 입력이 들어왔을때
+
+	#잘하자
 }
 
 int cpulimit(int argc, char **argv) {
