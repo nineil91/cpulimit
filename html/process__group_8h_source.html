@@ -1,0 +1,158 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="ko">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.9.5"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>cpulimit function fixed: cpulimit/src/process_group.h 소스 파일</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">cpulimit function fixed<span id="projectnumber">&#160;0.2</span>
+   </div>
+   <div id="projectbrief">cpulimit function fixed</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- 다음에 의해 생성됨 :  Doxygen 1.9.5 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+/* @license-end */
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function() {
+  initMenu('',true,false,'search.php','검색');
+  $(document).ready(function() { init_search(); });
+});
+/* @license-end */
+</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(document).ready(function(){initNavTree('process__group_8h_source.html',''); initResizable(); });
+/* @license-end */
+</script>
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">로딩중...</div>
+<div class="SRStatus" id="Searching">검색중...</div>
+<div class="SRStatus" id="NoMatches">일치하는것 없음</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="headertitle"><div class="title">process_group.h</div></div>
+</div><!--header-->
+<div class="contents">
+<a href="process__group_8h.html">이 파일의 문서화 페이지로 가기</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span> </div>
+<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span><span class="preprocessor">#ifndef __PROCESS_GROUP_H</span></div>
+<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span> </div>
+<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span><span class="preprocessor">#define __PROCESS_GROUP_H</span></div>
+<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span> </div>
+<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span><span class="preprocessor">#include &quot;<a class="code" href="process__iterator_8h.html">process_iterator.h</a>&quot;</span></div>
+<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span> </div>
+<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span><span class="preprocessor">#include &quot;<a class="code" href="list_8h.html">list.h</a>&quot;</span></div>
+<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span> </div>
+<div class="line"><a id="l00030" name="l00030"></a><span class="lineno"><a class="line" href="process__group_8h.html#abfa94111630dd246ae69dd918ff48992">   30</a></span><span class="preprocessor">#define PIDHASH_SZ 1024</span></div>
+<div class="line"><a id="l00031" name="l00031"></a><span class="lineno"><a class="line" href="process__group_8h.html#a50b3324467561d33e229cfd2a60b769c">   31</a></span><span class="preprocessor">#define pid_hashfn(x) ((((x) &gt;&gt; 8) ^ (x)) &amp; (PIDHASH_SZ - 1))</span></div>
+<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span> </div>
+<div class="line"><a id="l00033" name="l00033"></a><span class="lineno"><a class="line" href="structprocess__group.html">   33</a></span><span class="keyword">struct </span><a class="code hl_struct" href="structprocess__group.html">process_group</a></div>
+<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span>{</div>
+<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span>    <span class="comment">//hashtable with all the processes (array of struct list of struct process)</span></div>
+<div class="line"><a id="l00036" name="l00036"></a><span class="lineno"><a class="line" href="structprocess__group.html#ac40a14d15906eceb738cb47772859ddb">   36</a></span>    <span class="keyword">struct </span><a class="code hl_struct" href="structlist.html">list</a> *<a class="code hl_variable" href="structprocess__group.html#ac40a14d15906eceb738cb47772859ddb">proctable</a>[<a class="code hl_define" href="process__group_8h.html#abfa94111630dd246ae69dd918ff48992">PIDHASH_SZ</a>];</div>
+<div class="line"><a id="l00037" name="l00037"></a><span class="lineno"><a class="line" href="structprocess__group.html#a09ebca770081128439b9b4fa383ab3be">   37</a></span>    <span class="keyword">struct </span><a class="code hl_struct" href="structlist.html">list</a> *<a class="code hl_variable" href="structprocess__group.html#a09ebca770081128439b9b4fa383ab3be">proclist</a>;</div>
+<div class="line"><a id="l00038" name="l00038"></a><span class="lineno"><a class="line" href="structprocess__group.html#a4ccb375e6aacce04db32c573b2756fb1">   38</a></span>    pid_t <a class="code hl_variable" href="structprocess__group.html#a4ccb375e6aacce04db32c573b2756fb1">target_pid</a>;</div>
+<div class="line"><a id="l00039" name="l00039"></a><span class="lineno"><a class="line" href="structprocess__group.html#a2a43ed82ecbf7730e2c9e9ce5133c3be">   39</a></span>    <span class="keywordtype">int</span> <a class="code hl_variable" href="structprocess__group.html#a2a43ed82ecbf7730e2c9e9ce5133c3be">include_children</a>;</div>
+<div class="line"><a id="l00040" name="l00040"></a><span class="lineno"><a class="line" href="structprocess__group.html#aae109bf1aa06f0ccd3ffba3db4fcbd5e">   40</a></span>    <span class="keyword">struct </span>timeval <a class="code hl_variable" href="structprocess__group.html#aae109bf1aa06f0ccd3ffba3db4fcbd5e">last_update</a>;</div>
+<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span>};</div>
+<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span> </div>
+<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span><span class="keywordtype">int</span> <a class="code hl_function" href="process__group_8h.html#a0e167f4b15223ba53f15417129c3d396">init_process_group</a>(<span class="keyword">struct</span> <a class="code hl_struct" href="structprocess__group.html">process_group</a> *<a class="code hl_variable" href="cpulimit_8c.html#a1319c7af79e7e901f0ba0cd27015e83a">pgroup</a>, <span class="keywordtype">int</span> target_pid, <span class="keywordtype">int</span> include_children);</div>
+<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span> </div>
+<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span><span class="keywordtype">void</span> <a class="code hl_function" href="process__group_8h.html#a784e1ac7ab7f2b84d04853a0532ce472">update_process_group</a>(<span class="keyword">struct</span> <a class="code hl_struct" href="structprocess__group.html">process_group</a> *<a class="code hl_variable" href="cpulimit_8c.html#a1319c7af79e7e901f0ba0cd27015e83a">pgroup</a>);</div>
+<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span> </div>
+<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span><span class="keywordtype">int</span> <a class="code hl_function" href="process__group_8h.html#ab26ac736be964806ba799bbd30944639">close_process_group</a>(<span class="keyword">struct</span> <a class="code hl_struct" href="structprocess__group.html">process_group</a> *<a class="code hl_variable" href="cpulimit_8c.html#a1319c7af79e7e901f0ba0cd27015e83a">pgroup</a>);</div>
+<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span> </div>
+<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span><span class="keywordtype">int</span> <a class="code hl_function" href="process__group_8h.html#ab0e21c173ea7bfde923fdbdb8311fdc4">find_process_by_pid</a>(pid_t pid);</div>
+<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span> </div>
+<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span><span class="keywordtype">int</span> <a class="code hl_function" href="process__group_8h.html#ae44fa4e825bca09e3a7e7d6de5fb2cd8">find_process_by_name</a>(<span class="keyword">const</span> <span class="keywordtype">char</span> *process_name);</div>
+<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span> </div>
+<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span><span class="keywordtype">int</span> <a class="code hl_function" href="process__group_8h.html#ae570e602af31a97a08c8f7118a7fc34e">remove_process</a>(<span class="keyword">struct</span> <a class="code hl_struct" href="structprocess__group.html">process_group</a> *<a class="code hl_variable" href="cpulimit_8c.html#a1319c7af79e7e901f0ba0cd27015e83a">pgroup</a>, <span class="keywordtype">int</span> pid);</div>
+<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span> </div>
+<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span><span class="preprocessor">#endif</span></div>
+<div class="ttc" id="acpulimit_8c_html_a1319c7af79e7e901f0ba0cd27015e83a"><div class="ttname"><a href="cpulimit_8c.html#a1319c7af79e7e901f0ba0cd27015e83a">pgroup</a></div><div class="ttdeci">struct process_group pgroup</div><div class="ttdef"><b>Definition:</b> <a href="cpulimit_8c_source.html#l00079">cpulimit.c:79</a></div></div>
+<div class="ttc" id="alist_8h_html"><div class="ttname"><a href="list_8h.html">list.h</a></div></div>
+<div class="ttc" id="aprocess__group_8h_html_a0e167f4b15223ba53f15417129c3d396"><div class="ttname"><a href="process__group_8h.html#a0e167f4b15223ba53f15417129c3d396">init_process_group</a></div><div class="ttdeci">int init_process_group(struct process_group *pgroup, int target_pid, int include_children)</div><div class="ttdef"><b>Definition:</b> <a href="process__group_8c_source.html#l00081">process_group.c:81</a></div></div>
+<div class="ttc" id="aprocess__group_8h_html_a784e1ac7ab7f2b84d04853a0532ce472"><div class="ttname"><a href="process__group_8h.html#a784e1ac7ab7f2b84d04853a0532ce472">update_process_group</a></div><div class="ttdeci">void update_process_group(struct process_group *pgroup)</div><div class="ttdef"><b>Definition:</b> <a href="process__group_8c_source.html#l00127">process_group.c:127</a></div></div>
+<div class="ttc" id="aprocess__group_8h_html_ab0e21c173ea7bfde923fdbdb8311fdc4"><div class="ttname"><a href="process__group_8h.html#ab0e21c173ea7bfde923fdbdb8311fdc4">find_process_by_pid</a></div><div class="ttdeci">int find_process_by_pid(pid_t pid)</div><div class="ttdef"><b>Definition:</b> <a href="process__group_8c_source.html#l00038">process_group.c:38</a></div></div>
+<div class="ttc" id="aprocess__group_8h_html_ab26ac736be964806ba799bbd30944639"><div class="ttname"><a href="process__group_8h.html#ab26ac736be964806ba799bbd30944639">close_process_group</a></div><div class="ttdeci">int close_process_group(struct process_group *pgroup)</div><div class="ttdef"><b>Definition:</b> <a href="process__group_8c_source.html#l00094">process_group.c:94</a></div></div>
+<div class="ttc" id="aprocess__group_8h_html_abfa94111630dd246ae69dd918ff48992"><div class="ttname"><a href="process__group_8h.html#abfa94111630dd246ae69dd918ff48992">PIDHASH_SZ</a></div><div class="ttdeci">#define PIDHASH_SZ</div><div class="ttdef"><b>Definition:</b> <a href="process__group_8h_source.html#l00030">process_group.h:30</a></div></div>
+<div class="ttc" id="aprocess__group_8h_html_ae44fa4e825bca09e3a7e7d6de5fb2cd8"><div class="ttname"><a href="process__group_8h.html#ae44fa4e825bca09e3a7e7d6de5fb2cd8">find_process_by_name</a></div><div class="ttdeci">int find_process_by_name(const char *process_name)</div><div class="ttdef"><b>Definition:</b> <a href="process__group_8c_source.html#l00049">process_group.c:49</a></div></div>
+<div class="ttc" id="aprocess__group_8h_html_ae570e602af31a97a08c8f7118a7fc34e"><div class="ttname"><a href="process__group_8h.html#ae570e602af31a97a08c8f7118a7fc34e">remove_process</a></div><div class="ttdeci">int remove_process(struct process_group *pgroup, int pid)</div><div class="ttdef"><b>Definition:</b> <a href="process__group_8c_source.html#l00197">process_group.c:197</a></div></div>
+<div class="ttc" id="aprocess__iterator_8h_html"><div class="ttname"><a href="process__iterator_8h.html">process_iterator.h</a></div></div>
+<div class="ttc" id="astructlist_html"><div class="ttname"><a href="structlist.html">list</a></div><div class="ttdef"><b>Definition:</b> <a href="list_8h_source.html#l00040">list.h:40</a></div></div>
+<div class="ttc" id="astructprocess__group_html"><div class="ttname"><a href="structprocess__group.html">process_group</a></div><div class="ttdef"><b>Definition:</b> <a href="process__group_8h_source.html#l00033">process_group.h:34</a></div></div>
+<div class="ttc" id="astructprocess__group_html_a09ebca770081128439b9b4fa383ab3be"><div class="ttname"><a href="structprocess__group.html#a09ebca770081128439b9b4fa383ab3be">process_group::proclist</a></div><div class="ttdeci">struct list * proclist</div><div class="ttdef"><b>Definition:</b> <a href="process__group_8h_source.html#l00037">process_group.h:37</a></div></div>
+<div class="ttc" id="astructprocess__group_html_a2a43ed82ecbf7730e2c9e9ce5133c3be"><div class="ttname"><a href="structprocess__group.html#a2a43ed82ecbf7730e2c9e9ce5133c3be">process_group::include_children</a></div><div class="ttdeci">int include_children</div><div class="ttdef"><b>Definition:</b> <a href="process__group_8h_source.html#l00039">process_group.h:39</a></div></div>
+<div class="ttc" id="astructprocess__group_html_a4ccb375e6aacce04db32c573b2756fb1"><div class="ttname"><a href="structprocess__group.html#a4ccb375e6aacce04db32c573b2756fb1">process_group::target_pid</a></div><div class="ttdeci">pid_t target_pid</div><div class="ttdef"><b>Definition:</b> <a href="process__group_8h_source.html#l00038">process_group.h:38</a></div></div>
+<div class="ttc" id="astructprocess__group_html_aae109bf1aa06f0ccd3ffba3db4fcbd5e"><div class="ttname"><a href="structprocess__group.html#aae109bf1aa06f0ccd3ffba3db4fcbd5e">process_group::last_update</a></div><div class="ttdeci">struct timeval last_update</div><div class="ttdef"><b>Definition:</b> <a href="process__group_8h_source.html#l00040">process_group.h:40</a></div></div>
+<div class="ttc" id="astructprocess__group_html_ac40a14d15906eceb738cb47772859ddb"><div class="ttname"><a href="structprocess__group.html#ac40a14d15906eceb738cb47772859ddb">process_group::proctable</a></div><div class="ttdeci">struct list * proctable[PIDHASH_SZ]</div><div class="ttdef"><b>Definition:</b> <a href="process__group_8h_source.html#l00036">process_group.h:36</a></div></div>
+</div><!-- fragment --></div><!-- contents -->
+</div><!-- doc-content -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a class="el" href="dir_ac16ee1d1c4fa1d365e2a21a9a29ada8.html">cpulimit</a></li><li class="navelem"><a class="el" href="dir_4a94c48dbbc96a068da9ecf1df84327c.html">src</a></li><li class="navelem"><a class="el" href="process__group_8h.html">process_group.h</a></li>
+    <li class="footer">다음에 의해 생성됨 :  <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5 </li>
+  </ul>
+</div>
+</body>
+</html>

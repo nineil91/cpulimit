@@ -1,0 +1,281 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="ko">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.9.5"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>cpulimit function fixed: cpulimit/src/process_iterator_apple.c 파일 참조</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">cpulimit function fixed<span id="projectnumber">&#160;0.2</span>
+   </div>
+   <div id="projectbrief">cpulimit function fixed</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- 다음에 의해 생성됨 :  Doxygen 1.9.5 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+/* @license-end */
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function() {
+  initMenu('',true,false,'search.php','검색');
+  $(document).ready(function() { init_search(); });
+});
+/* @license-end */
+</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(document).ready(function(){initNavTree('process__iterator__apple_8c.html',''); initResizable(); });
+/* @license-end */
+</script>
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">로딩중...</div>
+<div class="SRStatus" id="Searching">검색중...</div>
+<div class="SRStatus" id="NoMatches">일치하는것 없음</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="summary">
+<a href="#func-members">함수</a>  </div>
+  <div class="headertitle"><div class="title">process_iterator_apple.c 파일 참조</div></div>
+</div><!--header-->
+<div class="contents">
+<div class="textblock"><code>#include &lt;errno.h&gt;</code><br />
+<code>#include &lt;stdio.h&gt;</code><br />
+<code>#include &lt;libproc.h&gt;</code><br />
+</div><div class="textblock"><div class="dynheader">
+process_iterator_apple.c에 대한 include 의존 그래프</div>
+<div class="dyncontent">
+<div class="center"><img src="process__iterator__apple_8c__incl.png" border="0" usemap="#acpulimit_2src_2process__iterator__apple_8c" alt=""/></div>
+<map name="acpulimit_2src_2process__iterator__apple_8c" id="acpulimit_2src_2process__iterator__apple_8c">
+<area shape="rect" title=" " alt="" coords="54,5,193,45"/>
+<area shape="rect" title=" " alt="" coords="5,93,68,119"/>
+<area shape="rect" title=" " alt="" coords="93,93,154,119"/>
+<area shape="rect" title=" " alt="" coords="179,93,249,119"/>
+</map>
+</div>
+</div>
+<p><a href="process__iterator__apple_8c_source.html">이 파일의 소스 코드 페이지로 가기</a></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
+함수</h2></td></tr>
+<tr class="memitem:a48ee00a42bf97ac75be3e41d5215bef3"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="process__iterator__apple_8c.html#a48ee00a42bf97ac75be3e41d5215bef3">unique_nonzero_ints</a> (int *arr_in, int len_in, int *arr_out)</td></tr>
+<tr class="separator:a48ee00a42bf97ac75be3e41d5215bef3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a713c6d8202f3124ce5b83d995884172c"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="process__iterator__apple_8c.html#a713c6d8202f3124ce5b83d995884172c">init_process_iterator</a> (struct <a class="el" href="structprocess__iterator.html">process_iterator</a> *it, struct <a class="el" href="structprocess__filter.html">process_filter</a> *filter)</td></tr>
+<tr class="separator:a713c6d8202f3124ce5b83d995884172c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a89bcdc4ae048caddf9effbe3e8638c0a"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="process__iterator__apple_8c.html#a89bcdc4ae048caddf9effbe3e8638c0a">get_next_process</a> (struct <a class="el" href="structprocess__iterator.html">process_iterator</a> *it, struct <a class="el" href="structprocess.html">process</a> *p)</td></tr>
+<tr class="separator:a89bcdc4ae048caddf9effbe3e8638c0a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a62ce507a11f853cb5ba5db334711b5a4"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="process__iterator__apple_8c.html#a62ce507a11f853cb5ba5db334711b5a4">close_process_iterator</a> (struct <a class="el" href="structprocess__iterator.html">process_iterator</a> *it)</td></tr>
+<tr class="separator:a62ce507a11f853cb5ba5db334711b5a4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<h2 class="groupheader">함수 문서화</h2>
+<a id="a62ce507a11f853cb5ba5db334711b5a4" name="a62ce507a11f853cb5ba5db334711b5a4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a62ce507a11f853cb5ba5db334711b5a4">&#9670;&#160;</a></span>close_process_iterator()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int close_process_iterator </td>
+          <td>(</td>
+          <td class="paramtype">struct <a class="el" href="structprocess__iterator.html">process_iterator</a> *&#160;</td>
+          <td class="paramname"><em>it</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition"><a class="el" href="process__iterator__apple_8c_source.html">process_iterator_apple.c</a> 파일의 <a class="el" href="process__iterator__apple_8c_source.html#l00141">141</a> 번째 라인에서 정의되었습니다.</p>
+
+</div>
+</div>
+<a id="a89bcdc4ae048caddf9effbe3e8638c0a" name="a89bcdc4ae048caddf9effbe3e8638c0a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a89bcdc4ae048caddf9effbe3e8638c0a">&#9670;&#160;</a></span>get_next_process()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int get_next_process </td>
+          <td>(</td>
+          <td class="paramtype">struct <a class="el" href="structprocess__iterator.html">process_iterator</a> *&#160;</td>
+          <td class="paramname"><em>it</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">struct <a class="el" href="structprocess.html">process</a> *&#160;</td>
+          <td class="paramname"><em>p</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition"><a class="el" href="process__iterator__apple_8c_source.html">process_iterator_apple.c</a> 파일의 <a class="el" href="process__iterator__apple_8c_source.html#l00101">101</a> 번째 라인에서 정의되었습니다.</p>
+
+</div>
+</div>
+<a id="a713c6d8202f3124ce5b83d995884172c" name="a713c6d8202f3124ce5b83d995884172c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a713c6d8202f3124ce5b83d995884172c">&#9670;&#160;</a></span>init_process_iterator()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int init_process_iterator </td>
+          <td>(</td>
+          <td class="paramtype">struct <a class="el" href="structprocess__iterator.html">process_iterator</a> *&#160;</td>
+          <td class="paramname"><em>it</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">struct <a class="el" href="structprocess__filter.html">process_filter</a> *&#160;</td>
+          <td class="paramname"><em>filter</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition"><a class="el" href="process__iterator__apple_8c_source.html">process_iterator_apple.c</a> 파일의 <a class="el" href="process__iterator__apple_8c_source.html#l00055">55</a> 번째 라인에서 정의되었습니다.</p>
+
+</div>
+</div>
+<a id="a48ee00a42bf97ac75be3e41d5215bef3" name="a48ee00a42bf97ac75be3e41d5215bef3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a48ee00a42bf97ac75be3e41d5215bef3">&#9670;&#160;</a></span>unique_nonzero_ints()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int unique_nonzero_ints </td>
+          <td>(</td>
+          <td class="paramtype">int *&#160;</td>
+          <td class="paramname"><em>arr_in</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>len_in</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int *&#160;</td>
+          <td class="paramname"><em>arr_out</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p >cpulimit - a CPU limiter for Linux</p>
+<p >Copyright (C) 2005-2012, by: Angelo Marletta &lt;angelo dot marletta at gmail dot com&gt;</p>
+<p >This program is free software; you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation; either version 2 of the License, or (at your option) any later version.</p>
+<p >This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.</p>
+<p >You should have received a copy of the GNU General Public License along with this program; if not, write to the Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.</p>
+<p >Author: Simon Sigurdhsson </p>
+
+<p class="definition"><a class="el" href="process__iterator__apple_8c_source.html">process_iterator_apple.c</a> 파일의 <a class="el" href="process__iterator__apple_8c_source.html#l00029">29</a> 번째 라인에서 정의되었습니다.</p>
+<div class="dynheader">
+이 함수를 호출하는 함수들에 대한 그래프입니다.:</div>
+<div class="dyncontent">
+<div class="center"><img src="process__iterator__apple_8c_a48ee00a42bf97ac75be3e41d5215bef3_icgraph.png" border="0" usemap="#aprocess__iterator__apple_8c_a48ee00a42bf97ac75be3e41d5215bef3_icgraph" alt=""/></div>
+<map name="aprocess__iterator__apple_8c_a48ee00a42bf97ac75be3e41d5215bef3_icgraph" id="aprocess__iterator__apple_8c_a48ee00a42bf97ac75be3e41d5215bef3_icgraph">
+<area shape="rect" title=" " alt="" coords="915,132,1056,157"/>
+<area shape="rect" href="process__iterator__linux_8c.html#a713c6d8202f3124ce5b83d995884172c" title=" " alt="" coords="728,132,867,157"/>
+<area shape="rect" href="process__group_8c.html#ae44fa4e825bca09e3a7e7d6de5fb2cd8" title=" " alt="" coords="324,5,479,31"/>
+<area shape="rect" href="process__iterator__test_8c.html#a7e06e091478e5417c5f52a757a257287" title=" " alt="" coords="336,56,467,81"/>
+<area shape="rect" href="process__iterator__test_8c.html#ada7b9b86cd2c1523dac05a96f2936ee8" title=" " alt="" coords="327,107,476,132"/>
+<area shape="rect" href="process__iterator__test_8c.html#a0636647e5482a574c59ca53e828f6b05" title=" " alt="" coords="535,157,671,183"/>
+<area shape="rect" href="process__iterator__test_8c.html#ae26985dd2f46c494a47ba9a17fc5e7e5" title=" " alt="" coords="534,384,673,409"/>
+<area shape="rect" href="process__group_8c.html#a784e1ac7ab7f2b84d04853a0532ce472" title=" " alt="" coords="527,284,680,309"/>
+<area shape="rect" href="cpulimit_8c.html#af33fb80818473f3ad1559807758b2332" title=" " alt="" coords="5,107,72,132"/>
+<area shape="rect" href="process__iterator__test_8c.html#a3c04138a5bfe5d72780bb7e82a18e627" title=" " alt="" coords="13,265,64,291"/>
+<area shape="rect" href="process__group_8c.html#a0e167f4b15223ba53f15417129c3d396" title=" " alt="" coords="336,309,467,335"/>
+<area shape="rect" href="cpulimit_8c.html#a061ffa3391fc45f7fd66655fad07acdc" title=" " alt="" coords="149,208,247,233"/>
+<area shape="rect" href="process__iterator__test_8c.html#a55ae4848c0d667f8b7dc8b3c8f427f76" title=" " alt="" coords="120,387,276,412"/>
+<area shape="rect" href="process__iterator__test_8c.html#a8b6e4f540223a4c82d19694edcb6d113" title=" " alt="" coords="130,322,266,362"/>
+<area shape="rect" href="process__iterator__test_8c.html#a7b3c53294a3fa16e6f3a50f88d4f5f94" title=" " alt="" coords="130,258,266,298"/>
+</map>
+</div>
+
+</div>
+</div>
+</div><!-- contents -->
+</div><!-- doc-content -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a class="el" href="dir_ac16ee1d1c4fa1d365e2a21a9a29ada8.html">cpulimit</a></li><li class="navelem"><a class="el" href="dir_4a94c48dbbc96a068da9ecf1df84327c.html">src</a></li><li class="navelem"><a class="el" href="process__iterator__apple_8c.html">process_iterator_apple.c</a></li>
+    <li class="footer">다음에 의해 생성됨 :  <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5 </li>
+  </ul>
+</div>
+</body>
+</html>

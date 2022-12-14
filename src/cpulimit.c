@@ -314,7 +314,15 @@ void limit_process(pid_t pid, double limit, int include_children)
 	close_process_group(&pgroup);
 }
 
-int main(int argc, char **argv) {
+int main(int argc, char **argv){
+	#command line으로 입력 받기
+
+	#command line으로 하나의 입력이 들어왔을때
+
+	#command line으로 두개 이상의 입력이 들어왔을때
+}
+
+int cpulimit(int argc, char **argv) {
 	//argument variables
 	const char *exe = NULL;
 	int perclimit = 0;
