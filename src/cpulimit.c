@@ -27,55 +27,8 @@
  *
  */
 
-#include <stdio.h>
-#include <stdlib.h>
-#include <unistd.h>
-#include <getopt.h>
-#include <time.h>
-#include <signal.h>
-#include <string.h>
-#include <errno.h>
-#include <string.h>
-#include <sys/stat.h>
-#include <sys/time.h>
-#include <sys/sysctl.h>
-#include <sys/resource.h>
-#include <sys/types.h>
-#include <sys/wait.h>
+#include "cpulimit.h"
 
-#if defined(__APPLE__) || defined(__FREEBSD__)
-#include <libgen.h>
-#endif
-
-#include "process_group.h"
-#include "list.h"
-
-#ifdef HAVE_SYS_SYSINFO_H
-#include <sys/sysinfo.h>
-#endif
-
-#ifdef __APPLE__
-#include "memrchr.c"
-#endif
-
-//some useful macro
-#ifndef MIN
-#define MIN(a,b) (((a)<(b))?(a):(b))
-#endif
-#ifndef MAX
-#define MAX(a,b) (((a)>(b))?(a):(b))
-#endif
-
-//control time slot in microseconds
-//each slot is splitted in a working slice and a sleeping slice
-//TODO: make it adaptive, based on the actual system load
-#define TIME_SLOT 100000
-
-#define MAX_PRIORITY -10
-
-/* GLOBAL VARIABLES */
-
-//the "family"
 struct process_group pgroup;
 //pid of cpulimit
 pid_t cpulimit_pid;
@@ -95,6 +48,10 @@ int lazy = 0;
 //SIGINT and SIGTERM signal handler
 static void quit(int sig)
 {
+   process *current;
+   pthread_mutex_lock( &listLock );   // Lock the list to stop other threads.
+   current = plist->head;
+
 	//let all the processes continue if stopped
 	struct list_node *node = NULL;
 	if (pgroup.proclist != NULL)
@@ -109,6 +66,22 @@ static void quit(int sig)
 	printf("\r");
 	fflush(stdout);
 	exit(0);
+
+	   while( current != NULL )
+   {
+      if( current->threadid != 0 )
+      {
+         if( pthread_cancel( current->threadid ) != 0 )   // Kill the thread managing this process.
+            fprintf(stderr, "Could not kill managing thread of pid %d", current->pid);
+         kill( current->pid, SIGCONT );   // Release this process.
+      }
+      current = current->next;
+   }
+   // Never release listLock. This prevents other thread from adding
+   // more processes before we exit below.
+
+   printf("Exiting...\n");
+   exit(0);
 }
 
 //return t1-t2 in microseconds (no overflow checks, so better watch out!)
@@ -116,21 +89,27 @@ static inline unsigned long timediff(const struct timeval *t1,const struct timev
 {
 	return (t1->tv_sec - t2->tv_sec) * 1000000 + (t1->tv_usec - t2->tv_usec);
 }
+void print_caption()
+{
+   printf("\nPID\t%%USER\tPR\tNI\tVIRT\tRES\tSHR\tS\t%CPU\tMEM\n");
+}
 
 static void print_usage(FILE *stream, int exit_code)
 {
-	fprintf(stream, "Usage: %s [OPTIONS...] TARGET\n", program_name);
-	fprintf(stream, "   OPTIONS\n");
-	fprintf(stream, "      -l, --limit=N          percentage of cpu allowed from 0 to %d (required)\n", 100*NCPU);
-	fprintf(stream, "      -v, --verbose          show control statistics\n");
-	fprintf(stream, "      -z, --lazy             exit if there is no target process, or if it dies\n");
-	fprintf(stream, "      -i, --include-children limit also the children processes\n");
-	fprintf(stream, "      -h, --help             display this help and exit\n");
-	fprintf(stream, "   TARGET must be exactly one of these:\n");
-	fprintf(stream, "      -p, --pid=N            pid of the process (implies -z)\n");
-	fprintf(stream, "      -e, --exe=FILE         name of the executable program file or path name\n");
-	fprintf(stream, "      COMMAND [ARGS]         run this command and limit it (implies -z)\n");
-	fprintf(stream, "\nReport bugs to <marlonx80@hotmail.com>.\n");
+   fprintf(stream, "Usage: %s TARGET [OPTIONS] [TARGET [OPTIONS]]...\n",process_name);
+   fprintf(stream, "   TARGET is composed of these:\n");
+   fprintf(stream, "      -p, --pid=N           pid of the process. There can be more than one of these.\n");
+   fprintf(stream, "      -e, --exe=FILE        exact name of the executable process file. Mutually exclusive with -P\n");
+   fprintf(stream, "      -s, --startswith=NAME name of process(es) to manage starts with NAME\n");
+   fprintf(stream, "      -P, --path=PATH       absolute path name of the executable process file. Mutually exclusive with -e\n");
+   fprintf(stream, "   OPTIONS\n");
+   fprintf(stream, "      -l, --limit=N         percentage of cpu allowed from 0 to 100 (mandatory per target)\n");
+   fprintf(stream, "      -v, --verbose         show control statistics\n");
+   fprintf(stream, "      -z, --lazy            exit if there is no suitable target process, or if it dies\n");
+   fprintf(stream, "      -h, --help            display this help and exit\n");
+   fprintf(stream, "   EXAMPLE\n");
+   fprintf(stream, "      %s -p 9704 -l 10 -s looper -l 20\n", process_name);
+   fprintf(stream, "      Limits process 9704 to 10%% and any process that begins with \"looper\" to 20%%\n");
 	exit(exit_code);
 }
 
@@ -314,17 +293,7 @@ void limit_process(pid_t pid, double limit, int include_children)
 	close_process_group(&pgroup);
 }
 
-int main(int argc, char **argv){
-	#command line으로 입력 받기
-	
-	#command line으로 하나의 입력이 들어왔을때
-
-	#command line으로 두개 이상의 입력이 들어왔을때
-
-	#잘하자
-}
-
-int cpulimit(int argc, char **argv) {
+int main(int argc, char **argv) {
 	//argument variables
 	const char *exe = NULL;
 	int perclimit = 0;
@@ -333,7 +302,13 @@ int cpulimit(int argc, char **argv) {
 	int limit_ok = 0;
 	pid_t pid = 0;
 	int include_children = 0;
-
+	char *endptr;
+	int targetChosen;
+	int next_option;      // For parsing arguments.
+	pthread_t threadid;   // We will create a thread in main(), and this is it.
+	pthread_t crapid;     // Don't care what this is.
+	
+	const char* short_options="p:e:s:P:l:vzh";
 	//get program name
 	char *p = (char*)memrchr(argv[0], (unsigned int)'/', strlen(argv[0]));
 	program_name = p==NULL ? argv[0] : (p+1);
@@ -349,39 +324,75 @@ int cpulimit(int argc, char **argv) {
 	const char* short_options = "+p:e:l:vzih";
 	//An array describing valid long options
 	const struct option long_options[] = {
-		{ "pid",        required_argument, NULL, 'p' },
-		{ "exe",        required_argument, NULL, 'e' },
-		{ "limit",      required_argument, NULL, 'l' },
-		{ "verbose",    no_argument,       NULL, 'v' },
-		{ "lazy",       no_argument,       NULL, 'z' },
-		{ "include-children", no_argument,  NULL, 'i' },
-		{ "help",       no_argument,       NULL, 'h' },
-		{ 0,            0,                 0,     0  }
+      { "pid", required_argument, NULL, 'p' },
+      { "exe", required_argument, NULL, 'e' },
+      { "startswith", required_argument, NULL, 's'},
+      { "path", required_argument, NULL, 'P' },
+      { "limit", required_argument, NULL, 'l' },
+      { "verbose", no_argument, NULL, 'v' },
+      { "lazy", no_argument, NULL, 'z' },
+      { "help", no_argument, NULL, 'h' },
+      { NULL, 0, NULL, 0 }
 	};
+
+	   // Argument variables.
+   OptionBlock *optBlock;
+
+   verbose = 0;
+   lazy = 0;
+   exactname = 1;
+   pid = 0;
+   noMatchingPids = 0;
+   noStaticPids = 0;
+
+   // Get process name.
+   process_name = rindex(argv[0], '/')==NULL ? argv[0] : (rindex(argv[0], '/')+sizeof(char));
+   pthread_mutex_init( &listLock, NULL );   // Initialize mutex lock on list.
+   plist = newProcList();
+   optList = newOptList();
+   endptr = "\0";
+
+   optBlock = newOptBlock();
+   targetChosen = 0;
 
 	do {
 		next_option = getopt_long(argc, argv, short_options,long_options, &option_index);
 		switch(next_option) {
 			case 'p':
-				pid = atoi(optarg);
-				pid_ok = 1;
-				break;
+            if(targetChosen)
+               usageAndExit( stderr, 1 );
+            optBlock->pid = (int)strtol(optarg, &endptr, 10);
+            targetChosen = 1;
+            break;
 			case 'e':
-				exe = optarg;
-				exe_ok = 1;
-				break;
+            if(targetChosen)
+               usageAndExit( stderr, 1 );
+            optBlock->bExactName = 1;
+            optBlock->text = optarg;
+            targetChosen = 1;
+            break;
+			case 's':
+			if(targetChosen)
+               usageAndExit( stderr, 1 );
+            optBlock->bStartsWith = 1;
+            optBlock->text = optarg;
+            targetChosen = 1;
+            break;
+			case 'P':
+            if(targetChosen)
+               usageAndExit( stderr, 1 );
+            optBlock->bExactPath = 1;
+            optBlock->text = optarg;
+            targetChosen = 1;
+            break;
 			case 'l':
-				perclimit = atoi(optarg);
-				limit_ok = 1;
-				break;
+            optBlock->percLimit = (int)strtol(optarg, &endptr, 10);
+            break;
 			case 'v':
 				verbose = 1;
 				break;
 			case 'z':
 				lazy = 1;
-				break;
-			case 'i':
-				include_children = 1;
 				break;
 			case 'h':
 				print_usage(stdout, 1);
@@ -391,10 +402,82 @@ int cpulimit(int argc, char **argv) {
 				break;
 			case -1:
 				break;
+				
 			default:
-				abort();
+            usageAndExit( stderr, 1 );
 		}
+		if( errno != 0 || *endptr != '\0' )
+       {
+          fprintf(stderr, "Error: You probably input weird numbers.\n");
+          fprintf(stderr, "%s\n", strerror(errno));
+          usageAndExit(stderr, 1);
+       }
+      
+       if(OPTBLOCKDONE(optBlock))
+       {
+          addToOptList( optList, optBlock );
+          optBlock = newOptBlock();
+          targetChosen = 0;
+       }
 	} while(next_option != -1);
+
+      checkOptions();
+   // Parameters should be ok after this point.
+   
+   // Install signal handlers to clean up tidily
+   // if someone tries to kill us.
+   signal(SIGINT,quit);
+   signal(SIGTERM,quit);
+
+   if( verbose )
+      print_caption();
+
+   // This thread will run in all cases.
+   assert( pthread_create(&threadid, NULL, manage_list, NULL) == 0 );
+
+   // Start the "find_procs" thread
+   assert( pthread_create(&crapid, NULL, find_procs, NULL) == 0 );
+
+   // Wait on the thread to get done (if it does).
+   pthread_join( threadid, NULL );
+
+	if (pid_ok && (pid <= 1 || pid >= get_pid_max())) {
+		fprintf(stderr,"Error: Invalid value for argument PID\n");
+		print_usage(stderr, 1);
+		exit(1);
+	}
+	if (pid != 0) {
+		lazy = 1;
+	}
+
+	if (!limit_ok) {
+		fprintf(stderr,"Error: You must specify a cpu limit percentage\n");
+		print_usage(stderr, 1);
+		exit(1);
+	}
+	double limit = perclimit / 100.0;
+	if (limit<0 || limit >NCPU) {
+		fprintf(stderr,"Error: limit must be in the range 0-%d00\n", NCPU);
+		print_usage(stderr, 1);
+		exit(1);
+	}
+
+	int command_mode = optind < argc;
+	if (exe_ok + pid_ok + command_mode == 0) {
+		fprintf(stderr,"Error: You must specify one target process, either by name, pid, or command line\n");
+		print_usage(stderr, 1);
+		exit(1);
+	}
+	
+	if (exe_ok + pid_ok + command_mode > 1) {
+		fprintf(stderr,"Error: You must specify exactly one target process, either by name, pid, or command line\n");
+		print_usage(stderr, 1);
+		exit(1);
+	}
+
+	//all arguments are ok!
+   signal(SIGINT,quit);
+   signal(SIGTERM,quit);
 
 	if (pid_ok && (pid <= 1 || pid >= get_pid_max())) {
 		fprintf(stderr,"Error: Invalid value for argument PID\n");
